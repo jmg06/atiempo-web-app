@@ -1,0 +1,81 @@
+@use 'sass:list';
+@use 'sass:map';
+@use 'sass:math';
+
+$font-family: ('Atkinson Hyperlegible Next', Roboto, sans-serif);
+
+$scale: (
+  display-large: (64, 68, 300),
+  display-medium: (50, 56, 300),
+  display-small: (40, 48, 300),
+  headline-large: (32, 40, 700),
+  headline-medium: (29, 37, 700),
+  headline-small: (26, 34, 700),
+  title-large: (22, 28, 700),
+  title-medium: (18, 24, 700),
+  title-small: (16, 22, 700),
+  body-large: (18, 26, 400),
+  body-medium: (15, 20, 400),
+  body-small: (13, 18, 400),
+  label-large: (16, 20, 700),
+  label-medium: (13, 16, 500),
+  label-small: (12, 16, 500),
+);
+
+$button-label-size: 18;
+$button-label-weight: 700;
+
+$button-variants: (filled, outlined, text, tonal, protected);
+
+@function rem($px) {
+  @return math.div($px, 16) * 1rem;
+}
+
+@function _typescale-tokens() {
+  $tokens: ();
+
+  @each $role, $values in $scale {
+    $size: rem(list.nth($values, 1));
+    $line-height: rem(list.nth($values, 2));
+    $weight: list.nth($values, 3);
+
+    $tokens: map.merge(
+      $tokens,
+      (
+        #{$role}: #{$weight} #{$size} #{'/'} #{$line-height} #{$font-family},
+        #{$role}-font: $font-family,
+        #{$role}-size: $size,
+        #{$role}-line-height: $line-height,
+        #{$role}-weight: $weight,
+        #{$role}-tracking: 0,
+      )
+    );
+  }
+
+  @return $tokens;
+}
+
+@function _button-tokens() {
+  $tokens: ();
+
+  @each $variant in $button-variants {
+    $tokens: map.merge(
+      $tokens,
+      (
+        #{$variant}-label-text-size: rem($button-label-size),
+        #{$variant}-label-text-weight: $button-label-weight,
+      )
+    );
+  }
+
+  @return $tokens;
+}
+
+$config: (
+  plain-family: $font-family,
+  brand-family: $font-family,
+);
+
+$tokens: _typescale-tokens();
+
+$button-tokens: _button-tokens();
