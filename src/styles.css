@@ -132,3 +132,33 @@
     var(--app-brand-gradient-start) 85.356%
   );
 }
+
+at-site-page at-site-nav-bar {
+  view-transition-name: site-nav-bar;
+}
+
+at-site-page at-gradient-header {
+  view-transition-name: site-header;
+}
+
+::view-transition-group(*),
+::view-transition-old(*),
+::view-transition-new(*) {
+  animation-duration: 250ms;
+  animation-timing-function: ease-out;
+}
+
+:active-view-transition-type(zone-change)::view-transition-group(*),
+:active-view-transition-type(zone-change)::view-transition-old(*),
+:active-view-transition-type(zone-change)::view-transition-new(*) {
+  animation-duration: 200ms;
+  animation-timing-function: linear;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation: none;
+  }
+}

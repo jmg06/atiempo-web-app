@@ -11,7 +11,7 @@ import { SiteNavBar, SiteSection } from '../site-nav-bar/site-nav-bar';
     <main class="flex flex-1 flex-col">
       <at-gradient-header [heading]="heading()" [details]="details()" />
       <div class="flex-1 bg-body-gradient">
-        <div class="mx-auto flex w-full max-w-[1440px] flex-col gap-6 px-4 py-6 md:px-8 xl:px-24">
+        <div class="mx-auto flex w-full max-w-360 flex-col gap-6 px-4 py-6 md:px-8 xl:px-24">
           <ng-content />
         </div>
       </div>

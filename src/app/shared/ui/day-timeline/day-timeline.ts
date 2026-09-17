@@ -10,11 +10,12 @@ interface TimelineGeometry {
   readonly axisTop: number;
   readonly markerTop: number;
   readonly edgeLabelTop: number;
+  readonly edgeLabelOverhang: number;
 }
 
 const GEOMETRY: Record<DayTimelineFormat, TimelineGeometry> = {
-  'with-times': { height: 92, axisTop: 51, markerTop: 44, edgeLabelTop: 72 },
-  compact: { height: 44, axisTop: 11, markerTop: 4, edgeLabelTop: 32 },
+  'with-times': { height: 92, axisTop: 51, markerTop: 44, edgeLabelTop: 72, edgeLabelOverhang: 0 },
+  compact: { height: 44, axisTop: 11, markerTop: 4, edgeLabelTop: 32, edgeLabelOverhang: 4 },
 };
 
 const LABEL_HALF_WIDTH_PX = 75;
@@ -22,8 +23,15 @@ const LABEL_HALF_WIDTH_PX = 75;
 @Component({
   selector: 'at-day-timeline',
   template: `
-    <div class="overflow-x-auto" tabindex="0" role="group" [attr.aria-label]="label()">
-      <div aria-hidden="true" class="relative min-w-[640px]" [style.height.px]="geometry().height">
+    <div
+      class="overflow-x-auto"
+      tabindex="0"
+      role="group"
+      [attr.aria-label]="label()"
+      [style.padding-bottom.px]="geometry().edgeLabelOverhang"
+      [style.margin-bottom.px]="-geometry().edgeLabelOverhang"
+    >
+      <div aria-hidden="true" class="relative min-w-160" [style.height.px]="geometry().height">
         <div
           class="absolute inset-x-0 h-0.5 rounded-[1px] bg-outline-variant"
           [style.top.px]="geometry().axisTop"
@@ -31,7 +39,7 @@ const LABEL_HALF_WIDTH_PX = 75;
         @for (mark of marks(); track $index) {
           @if (format() === 'with-times') {
             <p
-              class="absolute top-4 w-[150px] -translate-x-1/2 text-center text-title-small text-on-surface"
+              class="absolute top-4 w-37.5 -translate-x-1/2 text-center text-title-small text-on-surface"
               [style.left]="mark.labelLeft"
             >
               {{ mark.label }}

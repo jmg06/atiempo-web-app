@@ -7,7 +7,7 @@ export type InfoTileHeadingStyle = 'title' | 'body';
   selector: 'at-info-tile',
   imports: [MatIcon],
   template: `
-    <mat-icon class="text-on-surface">{{ icon() }}</mat-icon>
+    <mat-icon class="text-on-surface!">{{ icon() }}</mat-icon>
     <div class="flex min-w-0 flex-1 flex-col gap-2">
       <p
         class="text-on-surface"

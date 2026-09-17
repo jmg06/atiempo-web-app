@@ -10,6 +10,14 @@ type StepState = 'done' | 'current' | 'pending';
 
 const FUNNEL_STEPS = ['Crea tu cuenta', 'Tus datos de salud', 'Crea tu hogar'] as const;
 
+function stepState(number: number, current: number): StepState {
+  if (number < current) {
+    return 'done';
+  }
+
+  return number === current ? 'current' : 'pending';
+}
+
 const PROMISES = [
   { icon: 'alarm', text: 'Cargas los bloques una vez y los dos teléfonos se enteran' },
   { icon: 'medication', text: 'Aceptas varios medicamentos por bloque, media tableta y líquidos' },
@@ -22,11 +30,11 @@ const PROMISES = [
   template: `
     <span
       aria-hidden="true"
-      class="pointer-events-none absolute top-[-170px] left-[340px] size-[460px] rounded-full bg-on-primary/7"
+      class="pointer-events-none absolute -top-42.5 left-85 size-115 rounded-full bg-on-primary/7"
     ></span>
     <span
       aria-hidden="true"
-      class="pointer-events-none absolute top-[739px] left-[-137px] hidden size-[400px] rounded-full bg-on-primary/7 lg:block"
+      class="pointer-events-none absolute top-184.75 -left-34.25 hidden size-100 rounded-full bg-on-primary/7 lg:block"
     ></span>
 
     <div class="relative flex flex-col gap-2.5">
@@ -39,7 +47,7 @@ const PROMISES = [
       <ul class="relative flex flex-col gap-6">
         @for (promise of promises; track promise.icon) {
           <li class="flex items-start gap-4">
-            <mat-icon class="text-primary-container">{{ promise.icon }}</mat-icon>
+            <mat-icon class="text-primary-container!">{{ promise.icon }}</mat-icon>
             <span class="min-w-0 flex-1 text-body-large text-on-primary">{{ promise.text }}</span>
           </li>
         }
@@ -56,7 +64,7 @@ const PROMISES = [
               @switch (funnelStep.state) {
                 @case ('done') {
                   <span class="flex size-8 shrink-0 items-center justify-center">
-                    <mat-icon class="text-primary-container">check_circle</mat-icon>
+                    <mat-icon class="text-primary-container!">check_circle</mat-icon>
                   </span>
                   <span class="min-w-0 flex-1 text-body-large">
                     <span class="sr-only">Hecho:</span>
@@ -111,9 +119,8 @@ export class AccessBrandPanel {
 
     return FUNNEL_STEPS.map((label, index) => {
       const number = index + 1;
-      const state: StepState = number < current ? 'done' : number === current ? 'current' : 'pending';
 
-      return { number, label, state };
+      return { number, label, state: stepState(number, current) };
     });
   });
 }

@@ -5,7 +5,7 @@ const DETAILS_SEPARATOR = '  ·  ';
 @Component({
   selector: 'at-gradient-header',
   template: `
-    <div class="mx-auto flex w-full max-w-[1440px] flex-col gap-2.5 px-4 py-8 md:px-8 xl:px-24">
+    <div class="mx-auto flex w-full max-w-360 flex-col gap-2.5 px-4 py-8 md:px-8 xl:px-24">
       <h1 class="text-headline-large">{{ heading() }}</h1>
       @if (detailsText()) {
         <p class="text-body-large whitespace-pre-wrap">{{ detailsText() }}</p>

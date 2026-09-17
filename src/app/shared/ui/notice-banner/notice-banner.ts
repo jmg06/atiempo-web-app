@@ -14,19 +14,19 @@ const NOTICE_STYLES: Record<NoticeKind, NoticeStyle> = {
   info: {
     container: 'bg-surface-container text-on-surface',
     icon: 'schedule',
-    iconColor: 'text-on-surface-variant',
+    iconColor: 'text-on-surface-variant!',
     role: null,
   },
   attention: {
     container: 'bg-state-pending-container text-on-state-pending-container inset-ring-2 inset-ring-state-pending',
     icon: 'warning',
-    iconColor: 'text-state-pending',
+    iconColor: 'text-state-pending!',
     role: 'alert',
   },
   result: {
     container: 'bg-state-done-container text-on-state-done-container',
     icon: 'check_circle',
-    iconColor: 'text-state-done',
+    iconColor: 'text-state-done!',
     role: 'status',
   },
 };

@@ -9,3 +9,7 @@ at-text-field .at-text-field__error-icon {
   width: 48px;
   height: 48px;
 }
+
+at-text-field .mat-mdc-form-field-hint-spacer {
+  display: none;
+}

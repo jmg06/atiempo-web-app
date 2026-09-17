@@ -10,17 +10,17 @@ const LABEL_HALF_WIDTH_PX = 75;
   selector: 'at-day-axis',
   template: `
     <div class="overflow-x-auto" tabindex="0" role="group" [attr.aria-label]="label()">
-      <div aria-hidden="true" class="relative h-[186px] min-w-[640px]">
-        <div class="absolute inset-x-0 top-[93px] h-0.5 rounded-[1px] bg-outline-variant"></div>
+      <div aria-hidden="true" class="relative h-46.5 min-w-160">
+        <div class="absolute inset-x-0 top-23.25 h-0.5 rounded-[1px] bg-outline-variant"></div>
         @for (mark of marks(); track $index) {
           <span
-            class="absolute top-[76px] h-9 rounded-[18px]"
+            class="absolute top-19 h-9 rounded-[18px]"
             [class]="mark.conflict ? 'bg-error-container inset-ring-[1.5px] inset-ring-error' : 'bg-primary-container'"
             [style.left.%]="mark.bandLeft"
             [style.width.%]="bandWidth"
           ></span>
           <p
-            class="absolute w-[150px] -translate-x-1/2 text-center text-title-small"
+            class="absolute w-37.5 -translate-x-1/2 text-center text-title-small"
             [class]="mark.conflict ? 'text-error' : 'text-on-surface'"
             [style.top.px]="mark.below ? 128 : 14"
             [style.left]="mark.labelLeft"
@@ -28,14 +28,14 @@ const LABEL_HALF_WIDTH_PX = 75;
             {{ mark.label }}
           </p>
           <p
-            class="absolute w-[150px] -translate-x-1/2 text-center text-label-medium text-on-surface-variant"
+            class="absolute w-37.5 -translate-x-1/2 text-center text-label-medium text-on-surface-variant"
             [style.top.px]="mark.below ? 154 : 40"
             [style.left]="mark.labelLeft"
           >
             {{ mark.countLabel }}
           </p>
           <span
-            class="absolute top-[86px] size-4 -translate-x-1/2 rounded-full"
+            class="absolute top-21.5 size-4 -translate-x-1/2 rounded-full"
             [class]="mark.conflict ? 'bg-error' : 'bg-primary'"
             [style.left.%]="mark.position"
           ></span>

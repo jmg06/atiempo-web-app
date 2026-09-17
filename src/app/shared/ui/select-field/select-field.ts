@@ -1,4 +1,5 @@
-import { Component, ViewEncapsulation, input, model } from '@angular/core';
+import { Component, ViewEncapsulation, input, model, output, viewChild } from '@angular/core';
+import { FormValueControl } from '@angular/forms/signals';
 import { MatFormField, MatLabel, MatSuffix } from '@angular/material/form-field';
 import { MatIcon } from '@angular/material/icon';
 import { MatOption, MatSelect } from '@angular/material/select';
@@ -20,6 +21,7 @@ export interface SelectOption<T> {
         [value]="value()"
         [disabled]="disabled()"
         (valueChange)="value.set($event)"
+        (openedChange)="onOpenedChange($event)"
       >
         @for (option of options(); track option.value) {
           <mat-option [value]="option.value">{{ option.label }}</mat-option>
@@ -34,9 +36,22 @@ export interface SelectOption<T> {
     class: 'block',
   },
 })
-export class SelectField<T> {
+export class SelectField<T> implements FormValueControl<T | undefined> {
   readonly label = input.required<string>();
   readonly options = input.required<readonly SelectOption<T>[]>();
   readonly value = model<T>();
   readonly disabled = input(false);
+  readonly touch = output<void>();
+
+  private readonly select = viewChild.required(MatSelect);
+
+  focus(options?: FocusOptions): void {
+    this.select().focus(options);
+  }
+
+  protected onOpenedChange(opened: boolean): void {
+    if (!opened) {
+      this.touch.emit();
+    }
+  }
 }

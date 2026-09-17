@@ -23,7 +23,7 @@ const NAV_ITEMS: readonly NavItem[] = [
   imports: [NgTemplateOutlet, RouterLink],
   template: `
     <header
-      class="mx-auto flex w-full max-w-[1440px] flex-wrap items-center gap-x-8 gap-y-3 px-4 py-3 sm:min-h-[72px] sm:flex-nowrap sm:py-0 md:px-8 xl:px-24"
+      class="mx-auto flex w-full max-w-360 flex-wrap items-center gap-x-8 gap-y-3 px-4 py-3 sm:min-h-18 sm:flex-nowrap sm:py-0 md:px-8 xl:px-24"
     >
       @if (brandIsCurrentPage()) {
         <div class="flex flex-col whitespace-nowrap">
@@ -45,7 +45,7 @@ const NAV_ITEMS: readonly NavItem[] = [
               @if (item.section === section() && sectionIsCurrentPage()) {
                 <span aria-current="page" class="flex flex-col items-center gap-1.5 text-label-large text-on-surface">
                   {{ item.label }}
-                  <span class="h-[3px] w-full rounded-[2px] bg-primary"></span>
+                  <span class="h-0.75 w-full rounded-[2px] bg-primary"></span>
                 </span>
               } @else {
                 <a
@@ -55,7 +55,7 @@ const NAV_ITEMS: readonly NavItem[] = [
                 >
                   {{ item.label }}
                   @if (item.section === section()) {
-                    <span class="h-[3px] w-full rounded-[2px] bg-primary"></span>
+                    <span class="h-0.75 w-full rounded-[2px] bg-primary"></span>
                   }
                 </a>
               }

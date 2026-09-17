@@ -51,6 +51,14 @@ $_state-layer-opacity: 0.08;
   }
 }
 
+@mixin _progress() {
+  @include mat.progress-spinner-overrides(
+    (
+      active-indicator-color: currentColor,
+    )
+  );
+}
+
 @mixin _form-fields() {
   @include mat.form-field-overrides(
     (
@@ -65,6 +73,10 @@ $_state-layer-opacity: 0.08;
   .mat-mdc-form-field .mat-mdc-form-field-hint-wrapper:has(.mat-mdc-form-field-hint),
   .mat-mdc-form-field .mat-mdc-form-field-error-wrapper {
     padding-top: 4px;
+  }
+
+  .mat-mdc-form-field .mat-mdc-form-field-hint-wrapper {
+    color: var(--mat-sys-on-surface-variant);
   }
 
   // Material's 16px strut makes the one-line hint taller than its line height.
@@ -171,6 +183,7 @@ $_state-layer-opacity: 0.08;
 
 @mixin overrides() {
   @include _buttons();
+  @include _progress();
   @include _form-fields();
   @include _select();
   @include _selection-controls();

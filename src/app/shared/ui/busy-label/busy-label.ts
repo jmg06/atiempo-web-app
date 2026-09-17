@@ -1,19 +1,20 @@
 import { Component, input } from '@angular/core';
-import { MatIcon } from '@angular/material/icon';
+import { MatProgressSpinner } from '@angular/material/progress-spinner';
 
 @Component({
   selector: 'at-busy-label',
-  imports: [MatIcon],
+  imports: [MatProgressSpinner],
   template: `
     @if (busy()) {
-      <mat-icon class="align-middle">pending</mat-icon>
-      <span class="ms-2 align-middle">UN MOMENTO</span>
+      <mat-spinner role="presentation" aria-hidden="true" [diameter]="24" [strokeWidth]="3" />
+      <span>UN MOMENTO</span>
     } @else {
       <ng-content />
     }
   `,
   host: {
     'aria-live': 'polite',
+    class: 'flex items-center justify-center gap-2',
   },
 })
 export class BusyLabel {

@@ -6,10 +6,10 @@ import { MatIcon } from '@angular/material/icon';
   imports: [MatIcon],
   template: `
     @if (passed()) {
-      <mat-icon class="text-state-done">check_circle</mat-icon>
+      <mat-icon class="text-state-done!">check_circle</mat-icon>
       <span class="sr-only">Cumple:</span>
     } @else {
-      <mat-icon class="text-state-pending">close</mat-icon>
+      <mat-icon class="text-state-pending!">close</mat-icon>
       <span class="sr-only">No cumple:</span>
     }
     <span class="min-w-0 flex-1 text-body-large text-on-surface"><ng-content /></span>
