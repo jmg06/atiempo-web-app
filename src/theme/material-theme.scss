@@ -2,6 +2,7 @@
 @use './theme-colors' as at-colors;
 @use './theme-color-roles' as at-color-roles;
 @use './theme-typography' as at-typography;
+@use './theme-components' as at-components;
 
 html {
   height: 100%;
@@ -21,6 +22,7 @@ html {
   @include mat.theme-overrides(at-typography.$tokens);
   @include mat.button-overrides(at-typography.$button-tokens);
   @include at-color-roles.product-tokens;
+  @include at-components.overrides;
 }
 
 body {

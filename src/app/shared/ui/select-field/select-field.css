@@ -1,0 +1,13 @@
+at-select-field .mat-mdc-form-field {
+  width: 100%;
+}
+
+at-select-field .mat-mdc-select-arrow-wrapper {
+  display: none;
+}
+
+at-select-field .at-select-field__arrow {
+  box-sizing: content-box;
+  padding: 12px;
+  cursor: pointer;
+}

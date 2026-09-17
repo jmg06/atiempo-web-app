@@ -1,0 +1,183 @@
+@use '@angular/material' as mat;
+
+$_shadow-level2:
+  0 1px 2px 0 var(--mat-sys-shadow),
+  0 2px 6px 2px var(--mat-sys-shadow);
+$_state-layer-opacity: 0.08;
+
+@function _with-opacity($color, $percentage) {
+  @return color-mix(in srgb, #{$color} #{$percentage}, transparent);
+}
+
+@mixin _buttons() {
+  $disabled-container: _with-opacity(var(--mat-sys-on-surface), 10%);
+
+  @include mat.button-overrides(
+    (
+      filled-container-height: 56px,
+      filled-horizontal-padding: 24px,
+      filled-label-text-font: var(--mat-sys-title-medium-font),
+      filled-disabled-container-color: $disabled-container,
+      filled-pressed-state-layer-opacity: $_state-layer-opacity,
+      outlined-container-height: 56px,
+      outlined-horizontal-padding: 24px,
+      outlined-label-text-font: var(--mat-sys-title-medium-font),
+      outlined-label-text-color: var(--mat-sys-on-surface-variant),
+      outlined-outline-color: var(--mat-sys-outline-variant),
+      outlined-disabled-outline-color: var(--mat-sys-outline-variant),
+      outlined-state-layer-color: var(--mat-sys-on-surface-variant),
+      outlined-pressed-state-layer-opacity: $_state-layer-opacity,
+      outlined-ripple-color: _with-opacity(var(--mat-sys-on-surface-variant), 12%),
+      text-container-height: 56px,
+      text-horizontal-padding: 24px,
+      text-label-text-font: var(--mat-sys-title-medium-font),
+      text-pressed-state-layer-opacity: $_state-layer-opacity,
+    )
+  );
+
+  .mat-mdc-button-base.mat-mdc-button,
+  .mat-mdc-button-base.mat-mdc-outlined-button,
+  .mat-mdc-button-base.mat-mdc-unelevated-button {
+    line-height: var(--mat-sys-title-medium-line-height);
+  }
+
+  .mat-mdc-button-base:not(._mat-animation-noopable) > .mat-mdc-button-persistent-ripple::before {
+    transition: opacity 200ms cubic-bezier(0.2, 0, 0, 1);
+  }
+
+  .mat-mdc-button-base.mat-mdc-button.mat-mdc-button-disabled,
+  .mat-mdc-button-base.mat-mdc-outlined-button.mat-mdc-button-disabled {
+    background-color: $disabled-container;
+  }
+}
+
+@mixin _form-fields() {
+  @include mat.form-field-overrides(
+    (
+      outlined-focus-outline-width: 3px,
+      // Material scales the floating label to 75%.
+      outlined-label-text-populated-size: calc(var(--mat-sys-body-small-size) / 0.75),
+      // 15px + 26px line height + 15px = 56px.
+      container-vertical-padding: 15px,
+    )
+  );
+
+  .mat-mdc-form-field .mat-mdc-form-field-hint-wrapper:has(.mat-mdc-form-field-hint),
+  .mat-mdc-form-field .mat-mdc-form-field-error-wrapper {
+    padding-top: 4px;
+  }
+
+  // Material's 16px strut makes the one-line hint taller than its line height.
+  .mat-mdc-form-field .mat-mdc-form-field-subscript-dynamic-size .mat-mdc-form-field-bottom-align::before {
+    display: none;
+  }
+
+  .mat-mdc-form-field.mat-form-field-invalid {
+    @include mat.form-field-overrides(
+      (
+        outlined-outline-width: 3px,
+      )
+    );
+  }
+}
+
+@mixin _select() {
+  @include mat.select-overrides(
+    (
+      container-elevation-shadow: $_shadow-level2,
+    )
+  );
+
+  @include mat.option-overrides(
+    (
+      label-text-size: var(--mat-sys-label-large-size),
+      label-text-weight: var(--mat-sys-label-large-weight),
+      label-text-line-height: var(--mat-sys-label-large-line-height),
+    )
+  );
+
+  .mat-mdc-select-panel.at-select-panel {
+    margin-top: 6px;
+    border-radius: var(--mat-sys-corner-medium);
+
+    .mat-mdc-option {
+      isolation: isolate;
+      min-height: 48px;
+      padding: 0 16px;
+
+      &.mdc-list-item,
+      &.mdc-list-item--selected {
+        background-color: var(--mat-sys-surface-container-low);
+      }
+
+      &::before {
+        content: '';
+        position: absolute;
+        inset: 2px 4px;
+        z-index: -1;
+        border-radius: var(--mat-sys-corner-small);
+      }
+
+      &:hover::before {
+        background-color: _with-opacity(var(--mat-sys-on-surface), 8%);
+      }
+
+      // The selected option already marks the active one when the menu opens.
+      .mat-focus-indicator::before {
+        display: none;
+      }
+
+      &.mat-mdc-option-active:not(.mdc-list-item--selected)::before {
+        box-shadow: inset 0 0 0 2px var(--mat-sys-primary);
+      }
+
+      &.mdc-list-item--selected::before {
+        border-radius: var(--mat-sys-corner-medium);
+        background-color: var(--mat-sys-tertiary-container);
+      }
+
+      &.mdc-list-item--selected .mdc-list-item__primary-text {
+        color: var(--mat-sys-on-tertiary-container);
+      }
+    }
+  }
+}
+
+@mixin _selection-controls() {
+  $label-tokens: (
+    label-text-font: var(--mat-sys-body-large-font),
+    label-text-size: var(--mat-sys-body-large-size),
+    label-text-line-height: var(--mat-sys-body-large-line-height),
+    label-text-weight: var(--mat-sys-body-large-weight),
+    label-text-tracking: var(--mat-sys-body-large-tracking),
+  );
+
+  @include mat.checkbox-overrides($label-tokens);
+  @include mat.radio-overrides($label-tokens);
+
+  .mat-mdc-checkbox .mdc-form-field .mdc-checkbox {
+    margin: 4px;
+  }
+
+  .mat-mdc-checkbox .mdc-form-field .mdc-label {
+    padding-inline-start: 8px;
+  }
+
+  // Material's radio shows its focus ring for any focus origin, mouse clicks included.
+  .mat-mdc-radio-button.cdk-focused:not(.cdk-keyboard-focused) .mat-focus-indicator::before {
+    content: none;
+  }
+}
+
+@mixin overrides() {
+  @include _buttons();
+  @include _form-fields();
+  @include _select();
+  @include _selection-controls();
+
+  @include mat.strong-focus-indicators(
+    (
+      border-color: var(--mat-sys-primary),
+    )
+  );
+}

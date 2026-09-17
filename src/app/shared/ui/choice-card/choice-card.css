@@ -1,0 +1,24 @@
+at-choice-card .mat-mdc-radio-button {
+  display: block;
+  height: 100%;
+}
+
+at-choice-card .mdc-form-field {
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  padding: 16px 16px 16px 12px;
+  cursor: pointer;
+}
+
+at-choice-card .mdc-form-field .mdc-radio {
+  flex-shrink: 0;
+}
+
+at-choice-card .mdc-form-field .mdc-label {
+  flex: 1;
+  padding-inline-start: 16px;
+  cursor: pointer;
+}
