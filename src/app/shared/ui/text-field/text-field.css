@@ -3,11 +3,8 @@ at-text-field .mat-mdc-form-field {
 }
 
 at-text-field .at-text-field__error-icon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 48px;
-  height: 48px;
+  box-sizing: content-box;
+  padding: 12px;
 }
 
 at-text-field .mat-mdc-form-field-hint-spacer {

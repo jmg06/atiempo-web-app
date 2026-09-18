@@ -1,4 +1,3 @@
-import { NgOptimizedImage } from '@angular/common';
 import {
   Component,
   ElementRef,
@@ -12,13 +11,14 @@ import {
 } from '@angular/core';
 import { FormValueControl, ValidationError } from '@angular/forms/signals';
 import { MatError, MatFormField, MatHint, MatLabel, MatSuffix } from '@angular/material/form-field';
+import { MatIcon } from '@angular/material/icon';
 import { MatInput } from '@angular/material/input';
 
 export type TextFieldType = 'text' | 'email' | 'password' | 'tel';
 
 @Component({
   selector: 'at-text-field',
-  imports: [NgOptimizedImage, MatFormField, MatLabel, MatInput, MatHint, MatError, MatSuffix],
+  imports: [MatFormField, MatLabel, MatInput, MatHint, MatError, MatSuffix, MatIcon],
   template: `
     <mat-form-field appearance="outline" subscriptSizing="dynamic">
       <mat-label>{{ label() }}</mat-label>
@@ -34,9 +34,7 @@ export type TextFieldType = 'text' | 'email' | 'password' | 'tel';
         (blur)="touch.emit()"
       />
       @if (shownError()) {
-        <span matSuffix class="at-text-field__error-icon">
-          <img ngSrc="icons/field-error.svg" width="24" height="24" alt="" />
-        </span>
+        <mat-icon matSuffix class="at-text-field__error-icon text-error!">error</mat-icon>
       }
       @if (shownError()) {
         <mat-error>{{ shownError() }}</mat-error>
