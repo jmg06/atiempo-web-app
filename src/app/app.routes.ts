@@ -2,9 +2,39 @@ import { Routes } from '@angular/router';
 
 import { APP_PATHS } from './app.paths';
 import { knownBlockGuard } from './features/schedule/known-block.guard';
-import { siteZone } from './view-transitions';
+import { accessZone, siteZone } from './view-transitions';
 
 export const routes: Routes = [
+  {
+    path: APP_PATHS.signUp,
+    title: 'Crea tu cuenta · a tiempo',
+    data: accessZone,
+    loadComponent: () => import('./features/access/sign-up-page'),
+  },
+  {
+    path: APP_PATHS.healthDataConsent,
+    title: 'Tus datos de salud · a tiempo',
+    data: accessZone,
+    loadComponent: () => import('./features/access/health-data-consent-page'),
+  },
+  {
+    path: APP_PATHS.createHousehold,
+    title: 'Crea tu hogar · a tiempo',
+    data: accessZone,
+    loadComponent: () => import('./features/access/create-household-page'),
+  },
+  {
+    path: APP_PATHS.signIn,
+    title: 'Entra a tu cuenta · a tiempo',
+    data: accessZone,
+    loadComponent: () => import('./features/access/sign-in-page'),
+  },
+  {
+    path: APP_PATHS.recoverPassword,
+    title: 'Recupera tu clave · a tiempo',
+    data: accessZone,
+    loadComponent: () => import('./features/access/recover-password-page'),
+  },
   {
     path: APP_PATHS.desk,
     pathMatch: 'full',
@@ -30,5 +60,17 @@ export const routes: Routes = [
     title: 'Revisar el día · a tiempo',
     data: siteZone,
     loadComponent: () => import('./features/schedule/day-review-page'),
+  },
+  {
+    path: APP_PATHS.invitePerson,
+    title: 'Invitar a alguien · a tiempo',
+    data: siteZone,
+    loadComponent: () => import('./features/people/invite-person-page'),
+  },
+  {
+    path: APP_PATHS.people,
+    title: 'Personas · a tiempo',
+    data: siteZone,
+    loadComponent: () => import('./features/people/people-page'),
   },
 ];
