@@ -1,6 +1,7 @@
 import { Routes } from '@angular/router';
 
 import { APP_PATHS } from './app.paths';
+import { signInFirstGuard } from './features/access/sign-in-first.guard';
 import { knownBlockGuard } from './features/schedule/known-block.guard';
 import { accessZone, siteZone } from './view-transitions';
 
@@ -40,6 +41,7 @@ export const routes: Routes = [
     pathMatch: 'full',
     title: 'Escritorio · a tiempo',
     data: siteZone,
+    canActivate: [signInFirstGuard],
     loadComponent: () => import('./features/desk/desk-page'),
   },
   {

@@ -30,11 +30,11 @@ const PROMISES = [
   template: `
     <span
       aria-hidden="true"
-      class="pointer-events-none absolute -top-42.5 left-85 size-115 rounded-full bg-on-primary/7"
+      class="pointer-events-none absolute -top-42.5 -right-48 size-115 rounded-full bg-on-primary/7"
     ></span>
     <span
       aria-hidden="true"
-      class="pointer-events-none absolute top-184.75 -left-34.25 hidden size-100 rounded-full bg-on-primary/7 lg:block"
+      class="pointer-events-none absolute -bottom-40.75 -left-34.25 hidden size-100 rounded-full bg-on-primary/7 lg:block"
     ></span>
 
     <div class="relative flex flex-col gap-2.5">

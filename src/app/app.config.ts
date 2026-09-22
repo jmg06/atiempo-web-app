@@ -11,7 +11,7 @@ export const appConfig: ApplicationConfig = {
     provideRouter(
       routes,
       withComponentInputBinding(),
-      withViewTransitions({ skipInitialTransition: true, onViewTransitionCreated: markZoneChange })
+      withViewTransitions({ onViewTransitionCreated: markZoneChange })
     ),
     provideAppInitializer(() => {
       inject(MatIconRegistry).setDefaultFontSetClass('material-icons-outlined', 'mat-ligature-font');
