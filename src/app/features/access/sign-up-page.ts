@@ -5,6 +5,7 @@ import { Router, RouterLink } from '@angular/router';
 
 import { APP_PATHS } from '../../app.paths';
 import { AccountStore } from '../../data/account-store';
+import { MOCK_ACCOUNT } from '../../data/mock-account';
 import { MIN_PASSWORD_LENGTH } from '../../domain/account';
 import { AccessPage } from '../../shared/layout/access-page/access-page';
 import { FormCard } from '../../shared/layout/form-card/form-card';
@@ -17,7 +18,7 @@ interface SignUpFormValue {
   readonly password: string;
 }
 
-const EMPTY_SIGN_UP: SignUpFormValue = { email: '', password: '' };
+const DEFAULT_SIGN_UP: SignUpFormValue = { email: MOCK_ACCOUNT.email, password: MOCK_ACCOUNT.password };
 
 const signUpSchema = schema<SignUpFormValue>((account) => {
   validate(account.email, ({ value }) => validateEmail(value()));
@@ -66,7 +67,7 @@ export default class SignUpPage {
   protected readonly recoverPasswordPath = `/${APP_PATHS.recoverPassword}`;
   protected readonly passwordHint = `Al menos ${MIN_PASSWORD_LENGTH} caracteres`;
 
-  protected readonly model = signal<SignUpFormValue>(EMPTY_SIGN_UP);
+  protected readonly model = signal<SignUpFormValue>(DEFAULT_SIGN_UP);
   protected readonly signUpForm = form(this.model, signUpSchema, {
     submission: {
       action: () => this.createAccount(),

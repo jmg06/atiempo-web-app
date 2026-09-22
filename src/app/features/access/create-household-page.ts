@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 
 import { APP_PATHS } from '../../app.paths';
 import { HouseholdStore } from '../../data/household-store';
+import { MOCK_HOUSEHOLD } from '../../data/mock-household';
 import { AccessPage } from '../../shared/layout/access-page/access-page';
 import { FormCard } from '../../shared/layout/form-card/form-card';
 import { BusyLabel } from '../../shared/ui/busy-label/busy-label';
@@ -17,7 +18,11 @@ interface HouseholdFormValue {
   readonly birthDate: string;
 }
 
-const EMPTY_HOUSEHOLD: HouseholdFormValue = { name: '', careRecipientName: '', birthDate: '' };
+const DEFAULT_HOUSEHOLD: HouseholdFormValue = {
+  name: MOCK_HOUSEHOLD.name,
+  careRecipientName: MOCK_HOUSEHOLD.careRecipientName,
+  birthDate: '14 / 03 / 2011',
+};
 
 const householdSchema = schema<HouseholdFormValue>((household) => {
   validate(household.name, ({ value }) => validateRequired(value(), 'Escribe cómo se llama el hogar.'));
@@ -72,7 +77,7 @@ export default class CreateHouseholdPage {
   private readonly router = inject(Router);
   private readonly households = inject(HouseholdStore);
 
-  protected readonly model = signal<HouseholdFormValue>(EMPTY_HOUSEHOLD);
+  protected readonly model = signal<HouseholdFormValue>(DEFAULT_HOUSEHOLD);
   protected readonly householdForm = form(this.model, householdSchema, {
     submission: {
       action: () => this.createHousehold(),

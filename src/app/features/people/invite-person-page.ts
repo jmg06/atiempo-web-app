@@ -21,7 +21,12 @@ interface InviteFormValue {
   readonly email: string;
 }
 
-const EMPTY_INVITE: InviteFormValue = { channel: 'phone', fullName: '', phone: '', email: '' };
+const DEFAULT_INVITE: InviteFormValue = {
+  channel: 'phone',
+  fullName: 'Marta Restrepo',
+  phone: '300 000 00 00',
+  email: 'marta.restrepo@correo.com',
+};
 
 const PHONE_DIGITS = 10;
 
@@ -128,7 +133,7 @@ export default class InvitePersonPage {
 
   protected readonly validityNote = `La invitación vale por ${INVITATION_VALID_DAYS} días. Si vence, se puede reenviar desde Personas del hogar.`;
 
-  protected readonly model = signal<InviteFormValue>(EMPTY_INVITE);
+  protected readonly model = signal<InviteFormValue>(DEFAULT_INVITE);
   protected readonly inviteForm = form(this.model, inviteSchema, {
     submission: {
       action: () => this.sendInvitation(),

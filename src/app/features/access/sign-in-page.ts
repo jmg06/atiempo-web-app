@@ -5,6 +5,7 @@ import { Router, RouterLink } from '@angular/router';
 
 import { APP_PATHS } from '../../app.paths';
 import { AccountStore } from '../../data/account-store';
+import { MOCK_ACCOUNT } from '../../data/mock-account';
 import { ACCOUNT_LOCK_MINUTES, SIGN_IN_ATTEMPT_LIMIT } from '../../domain/account';
 import { countWord } from '../../domain/spanish-count';
 import { AccessPage } from '../../shared/layout/access-page/access-page';
@@ -18,7 +19,7 @@ interface SignInFormValue {
   readonly password: string;
 }
 
-const EMPTY_SIGN_IN: SignInFormValue = { email: '', password: '' };
+const DEFAULT_SIGN_IN: SignInFormValue = { email: MOCK_ACCOUNT.email, password: MOCK_ACCOUNT.password };
 
 const signInSchema = schema<SignInFormValue>((credentials) => {
   validate(credentials.email, ({ value }) => validateEmail(value()));
@@ -62,7 +63,7 @@ export default class SignInPage {
   protected readonly lockWarning = `Después de ${countWord(SIGN_IN_ATTEMPT_LIMIT)} intentos fallidos la cuenta se bloquea por ${countWord(ACCOUNT_LOCK_MINUTES)} minutos.`;
   protected readonly locked = this.accounts.locked;
 
-  protected readonly model = signal<SignInFormValue>(EMPTY_SIGN_IN);
+  protected readonly model = signal<SignInFormValue>(DEFAULT_SIGN_IN);
   protected readonly signInForm = form(this.model, signInSchema, {
     submission: {
       action: () => this.signIn(),

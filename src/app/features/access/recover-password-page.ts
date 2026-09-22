@@ -5,6 +5,7 @@ import { RouterLink } from '@angular/router';
 
 import { APP_PATHS } from '../../app.paths';
 import { AccountStore } from '../../data/account-store';
+import { MOCK_ACCOUNT } from '../../data/mock-account';
 import { AccessPage } from '../../shared/layout/access-page/access-page';
 import { FormCard } from '../../shared/layout/form-card/form-card';
 import { BusyLabel } from '../../shared/ui/busy-label/busy-label';
@@ -16,7 +17,7 @@ interface RecoverFormValue {
   readonly email: string;
 }
 
-const EMPTY_RECOVER: RecoverFormValue = { email: '' };
+const DEFAULT_RECOVER: RecoverFormValue = { email: MOCK_ACCOUNT.email };
 
 const recoverSchema = schema<RecoverFormValue>((recovery) => {
   validate(recovery.email, ({ value }) => validateEmail(value()));
@@ -57,7 +58,7 @@ export default class RecoverPasswordPage {
   protected readonly signInPath = `/${APP_PATHS.signIn}`;
   protected readonly sentTo = signal<string | null>(null);
 
-  protected readonly model = signal<RecoverFormValue>(EMPTY_RECOVER);
+  protected readonly model = signal<RecoverFormValue>(DEFAULT_RECOVER);
   protected readonly recoverForm = form(this.model, recoverSchema, {
     submission: {
       action: () => this.sendLink(),

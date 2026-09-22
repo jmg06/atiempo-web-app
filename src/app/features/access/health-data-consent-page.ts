@@ -65,7 +65,7 @@ export default class HealthDataConsentPage {
 
   protected readonly promises = DATA_PROMISES;
   protected readonly signUpPath = `/${APP_PATHS.signUp}`;
-  protected readonly accepted = signal(false);
+  protected readonly accepted = signal(true);
 
   protected acceptAndContinue(): void {
     this.router.navigateByUrl(`/${APP_PATHS.createHousehold}`);
