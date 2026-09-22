@@ -41,7 +41,7 @@ const inviteSchema = schema<InviteFormValue>((invitation) => {
 });
 
 function validatePhone(text: string): ValidationError | undefined {
-  const digits = text.replace(/\D/g, '');
+  const digits = text.replaceAll(/\D/g, '');
 
   if (!digits) {
     return { kind: 'required', message: 'Escribe el teléfono de la persona.' };

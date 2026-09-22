@@ -17,7 +17,7 @@ const SECOND_CAREGIVER = 'Puede recibir dosis delegadas y confirmarlas.';
 export function describeMembers(members: readonly HouseholdMember[]): string {
   const names = members.map(({ fullName, isCurrentUser }) => (isCurrentUser ? `${fullName}, que eres tú,` : fullName));
 
-  return joinAsSpanishList(names).replace(/,,/g, ',').replace(/,$/, '');
+  return joinAsSpanishList(names).replaceAll(',,', ',').replace(/,$/, '');
 }
 
 export function describeMemberAccess(member: HouseholdMember): string {
