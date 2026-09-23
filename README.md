@@ -81,7 +81,7 @@ La primera línea debe mostrar algo como `v24.18.0` y la segunda algo como `11.1
 Con Git:
 
 ```bash
-git clone <URL-de-este-repositorio>
+git clone https://github.com/jmg06/atiempo-web-app.git
 ```
 
 Sin Git: en GitHub, botón verde **Code** → **Download ZIP** → descomprimir la carpeta.
